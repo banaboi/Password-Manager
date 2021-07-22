@@ -92,14 +92,14 @@ def hash_string(word):
         - connection : database connection object
 '''
 def enter_login_info(connection):
-    print("################################")
+    print("#" * 30)
     username = input("Enter the username: ")
     email = input("Enter the email: ")
     password = input("Enter the soft password: ")
     service = input("Enter the service: ")
     put_into_table(connection, username, email, hash_string(password), service)
     print("Login information added successfully")
-    print("################################")
+    print("#" * 30)
     print("\n")
 
 '''
@@ -110,11 +110,11 @@ def enter_login_info(connection):
         - connection : database connection object
 '''
 def look_up_info_by_service(connection):
-    print("################################")
+    print("#" * 30)
     service = input("Which service is this for? ")
     result = get_info_by_service(service)
     print(f"Information --> {result}")
-    print("################################")
+    print("#" * 30)
     print("\n")
 
 
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     entry = input("Please enter the master password: ")
     if entry == SECRET_PASSWORD:
         print("Welcome to your Password Manager")
-        print("################################")
+        print("#" * 30)
         connection = connect_to_db()
         while True:
             print("What would you like to do?")
