@@ -27,9 +27,11 @@ def get_all_info(connection):
     cursor = connection.cursor()
     get_all_query = f"""SELECT * from {TABLE_NAME};"""
     cursor.execute(get_all_query)
+    result = cursor.fetchall()
     cursor.close()
     connection.commit()
-
+    
+    return result
 '''
     Gets the row of data from the database which specifies the login details of the 
     given service
@@ -117,6 +119,14 @@ def look_up_info_by_service(connection):
     print("#" * 30)
     print("\n")
 
+def look_up_all_login_information(connection):
+    print("#" * 30)
+    result = get_all_info(connection)
+    for account in result:
+        print(f"Information --> {account}")
+    print("#" * 30)
+    print("\n")
+
 
 if __name__ == "__main__":
     entry = input("Please enter the master password: ")
@@ -128,12 +138,15 @@ if __name__ == "__main__":
             print("What would you like to do?")
             print("1: Enter new login information")
             print("2: Look up login information by service")
-            print("3: Quit")
+            print("3: Get all login information")
+            print("4: Quit")
             command = int(input())
             if command == 1:
                 enter_login_info(connection)
             elif command == 2:
                 look_up_info_by_service(connection)
+            elif command == 3:
+                look_up_all_login_information(connection)
             else:
                 exit()
     else:
